@@ -8,7 +8,7 @@ public class social : MonoBehaviour {
     private string[] MaleNames = new string[] { "Byron","Dick","Evan","James","Joseph","Alex", "Kim", "Bill", "Daniel", "David", "Paul", "Joe", "Peter", "Tom" };
     private string[] FemaleNames = new string[] { "Mary", "Jenny", "Mila", "Gianna", "Elissa", "Tiffany", "Sarah", "Jessica", "Lisa", "Jennifer", "Eva", "Alice", "Anne", "Judy" };
     private List<string> Clan = new List<string>();
-    private List<Person> Popu = new List<Person>();
+    public List<Person> Popu = new List<Person>();
     
     
 
@@ -39,7 +39,7 @@ public class social : MonoBehaviour {
         {
             for (int j = 0; j < 2; j++)                                ///给每个家族安排两个人
             {
-                Person newPerson = Instantiate(person);
+				Person newPerson = new Person();
                 newPerson.single = true;                               ///是否单身
                 newPerson.sex = Mathf.Abs(1-j);                        ///1为男性，0为女性
                 giveTheName(newPerson,Clan[i]);
@@ -220,7 +220,7 @@ public class social : MonoBehaviour {
     {
         for (int i = 0; i < AllFam.Count; i++)
         {
-            Person newPerson = Instantiate(person);
+			Person newPerson = new Person();
             newPerson.sex = Random.Range(-1,1);
             newPerson.single = true;
             

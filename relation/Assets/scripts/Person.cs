@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Person : MonoBehaviour {
     public string ClanTag = null;
+	public UILabel text;
     public List<Person> Grand = new List<Person>();
     public List<Person> BroSis = new List<Person>();
     public List<Person> Parent = new List<Person>();

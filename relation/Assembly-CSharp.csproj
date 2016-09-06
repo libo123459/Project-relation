@@ -183,6 +183,7 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
+     <Compile Include="Assets\NameText.cs" />
      <Compile Include="Assets\scripts\Family.cs" />
      <Compile Include="Assets\scripts\Person.cs" />
      <Compile Include="Assets\scripts\UImanage.cs" />
