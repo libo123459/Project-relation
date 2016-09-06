@@ -8,6 +8,7 @@ public class Person : MonoBehaviour {
     public List<Person> Grand = new List<Person>();
     public List<Person> BroSis = new List<Person>();
     public List<Person> Parent = new List<Person>();
+    public List<Person> Children = new List<Person>();
     public string lastname = null;
     public string firstname = null;
     public int sex = 0;

@@ -6,7 +6,7 @@ public class UImanage : MonoBehaviour {
 	public Person person;
 	public GameObject grid;
 	public GameObject personBtn;
-    
+    public UILabel personInfo;
 	public List<GameObject> personList = new List<GameObject>();
 	// Use this for initialization
 	void Start () {
@@ -26,14 +26,27 @@ public class UImanage : MonoBehaviour {
 			GameObject thePerson = Instantiate(personBtn);
 			thePerson.transform.parent = grid.transform;
 			thePerson.transform.localScale = new Vector3(1,1,1);
-			thePerson.GetComponent<Person> ().text.text = social.Popu[i].firstname + social.Popu[i].lastname;
+            thePerson.GetComponent<Person>().text.text = GetTheName(i);
 			personList.Add(thePerson);
 			grid.GetComponent<UIGrid> ().Reposition();
 		}
 	}
 
-	public void OpenThePersonInfo()
+	public void OpenThePersonInfo(int personNum)
 	{
-		
+        personInfo.text = GetTheName(personNum);
+        for (int i = 0; i < social.Popu[personNum].Parent.Count; i++)
+        {
+            GameObject parent = Instantiate(personBtn);
+            parent.transform.localScale = new Vector3(1,1,1);
+           // parent.transform.SetParent();
+        }
 	}
+
+    string GetTheName(int num)
+    {
+        string text = social.Popu[num].firstname + social.Popu[num].lastname;
+        return text;
+    }
+    
 }

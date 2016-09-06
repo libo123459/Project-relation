@@ -227,6 +227,7 @@ public class social : MonoBehaviour {
             for (int j = 0; j < AllFam[i].Count; j++)
             {
                 newPerson.ClanTag = AllFam[i][j].ClanTag;
+                AllFam[i][j].Children.Add(newPerson);                             ///孩子加入父母的children数组
                 newPerson.Parent.Add(AllFam[i][j]);                               ///孩子的父母加入孩子的parent数组
                 for (int k = 0; k < AllFam[i][j].Grand.Count; k++)
                 {
@@ -239,6 +240,7 @@ public class social : MonoBehaviour {
                 }
             }
             AllFam[i].Add(newPerson);
+            Popu.Add(newPerson);
         }
     }
 
