@@ -39,21 +39,11 @@ public class social : MonoBehaviour {
         {
             for (int j = 0; j < 2; j++)                                ///给每个家族安排两个人
             {
-                Person newPerson = new Person();
+                Person newPerson = Instantiate(person);
                 newPerson.single = true;                               ///是否单身
                 newPerson.sex = Mathf.Abs(1-j);                        ///1为男性，0为女性
                 giveTheName(newPerson,Clan[i]);
-                for (int k = 0; k < newPerson.ClanTag.Length; k++)   ///给每个人打上家族标签
-                {
-                    if (newPerson.ClanTag == null)
-                    {
-                        newPerson.ClanTag = Clan[i];
-                        break;
-                    }
-                    else {
-                        continue;
-                    }
-                }
+                newPerson.ClanTag = Clan[i];
                 Popu.Add(newPerson);                                                    ///整个人口的List
             }
         }
@@ -230,7 +220,7 @@ public class social : MonoBehaviour {
     {
         for (int i = 0; i < AllFam.Count; i++)
         {
-            Person newPerson = new Person();
+            Person newPerson = Instantiate(person);
             newPerson.sex = Random.Range(-1,1);
             newPerson.single = true;
             
