@@ -4,28 +4,27 @@ using System.Collections;
 
 public class social : MonoBehaviour {
     public Person person;
+	public UIGrid grid;
     private string[] clan = new string[] { "Smith", "Jones", "Williams", "Taylor", "Brown", "Wilson"};
     private string[] MaleNames = new string[] { "Byron","Dick","Evan","James","Joseph","Alex", "Kim", "Bill", "Daniel", "David", "Paul", "Joe", "Peter", "Tom" };
     private string[] FemaleNames = new string[] { "Mary", "Jenny", "Mila", "Gianna", "Elissa", "Tiffany", "Sarah", "Jessica", "Lisa", "Jennifer", "Eva", "Alice", "Anne", "Judy" };
     private List<string> Clan = new List<string>();
     public List<Person> Popu = new List<Person>();
     
-    
-
     private List<List<Person>> AllFam = new List<List<Person>>();
     private int FamNum = 0;
 
     // Use this for initialization
     void Start () {
        
-        intiTheClan();
+        /*intiTheClan();
         intiThePopu();
         makeFamily();
         evolution();
-        printInfo();
+        printInfo();*/
 	}
 
-    void intiTheClan()                                                 ///初始化家族
+    void intiTheClan()                                                                  ///初始化家族
     {
         for (int i = 0; i < clan.Length; i++)
         {
@@ -33,23 +32,32 @@ public class social : MonoBehaviour {
         }
     }
 
-    void intiThePopu()                                                 ///初始化人口数量
+    void intiThePopu()                                                                  ///初始化人口数量
     {
         for (int i = 0; i < Clan.Count; i++)  
         {
-            for (int j = 0; j < 2; j++)                                ///给每个家族安排两个人
+            for (int j = 0; j < 2; j++)                                                 ///给每个家族安排两个人
             {
-				Person newPerson = new Person();
-                newPerson.single = true;                               ///是否单身
-                newPerson.sex = Mathf.Abs(1-j);                        ///1为男性，0为女性
-                giveTheName(newPerson,Clan[i]);
-                newPerson.ClanTag = Clan[i];
-                Popu.Add(newPerson);                                                    ///整个人口的List
+				
+				Person newperson = Instantiate(person);
+				newperson.transform.parent = grid.transform;
+				newperson.transform.localScale = new Vector3(1,1,1);
+				newperson.text.text = GetTheName(i);
+				newperson.PersonNum = i;
+		        newperson.single = true;                                                ///是否单身
+                newperson.sex = Mathf.Abs(1-j);                                         ///1为男性，0为女性
+
+                giveTheName(newperson,Clan[i]);
+                newperson.ClanTag = Clan[i];
+                Popu.Add(newperson);                                                    ///整个人口的List
+				grid.Reposition();
             }
         }
-        for (int i = 0; i < Popu.Count; i++)                                             ///初始人口的brolist
+
+        for (int i = 0; i < Popu.Count; i++)                                            ///初始人口的brolist
         {
             Person theperson = Popu[i];
+
             for (int j = 0; j < Popu.Count; j++)
             {
                 if (i != j)
@@ -138,7 +146,7 @@ public class social : MonoBehaviour {
                 }
             }
 
-            for (int j = 0; j < other.Parent.Count; j++)                                       ///父母不是爷爷辈                     
+            for (int j = 0; j < other.Parent.Count; j++)                                ///父母不是爷爷辈                     
             {
                 if (thePerson.Grand[i] != other.Parent[j])
                 {
@@ -227,8 +235,8 @@ public class social : MonoBehaviour {
             for (int j = 0; j < AllFam[i].Count; j++)
             {
                 newPerson.ClanTag = AllFam[i][j].ClanTag;
-                AllFam[i][j].Children.Add(newPerson);                             ///孩子加入父母的children数组
-                newPerson.Parent.Add(AllFam[i][j]);                               ///孩子的父母加入孩子的parent数组
+                AllFam[i][j].Children.Add(newPerson);                              ///孩子加入父母的children数组
+                newPerson.Parent.Add(AllFam[i][j]);                                ///孩子的父母加入孩子的parent数组
                 for (int k = 0; k < AllFam[i][j].Grand.Count; k++)
                 {
                     newPerson.Grand.Add(AllFam[i][j].Parent[k]);                   ///父母的父母加入孩子的Grand数组
@@ -254,6 +262,13 @@ public class social : MonoBehaviour {
             print("The Num" + i + " :" + AllFam[i][0].firstname + AllFam[i][0].lastname + " and " + AllFam[i][1].firstname + AllFam[i][1].lastname + " Kid : " + AllFam[i][2].firstname + AllFam[i][2].lastname);
         }
     }
+
+	string GetTheName(int num)
+	{
+		string text = Popu[num].firstname + Popu[num].lastname;
+		return text;
+	}
+
 
     
 	// Update is called once per frame

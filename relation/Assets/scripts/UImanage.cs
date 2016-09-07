@@ -5,11 +5,17 @@ public class UImanage : MonoBehaviour {
 	public social social;
 	public Person person;
 	public GameObject grid;
+	public GameObject GrandGrid;
+	public GameObject ParentGrid;
+	public GameObject BroSisGrid;
+	public GameObject ChildrenGrid;
 	public GameObject personBtn;
     public UILabel personInfo;
-	public List<GameObject> personList = new List<GameObject>();
+
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
+		person.uimanage = this;
 	
 	}
 	
@@ -26,27 +32,59 @@ public class UImanage : MonoBehaviour {
 			GameObject thePerson = Instantiate(personBtn);
 			thePerson.transform.parent = grid.transform;
 			thePerson.transform.localScale = new Vector3(1,1,1);
-            thePerson.GetComponent<Person>().text.text = GetTheName(i);
-			personList.Add(thePerson);
+           // thePerson.GetComponent<Person>().text.text = GetTheName(i);
+			thePerson.GetComponent<Person>().PersonNum = i;
 			grid.GetComponent<UIGrid> ().Reposition();
 		}
 	}
 
 	public void OpenThePersonInfo(int personNum)
 	{
-        personInfo.text = GetTheName(personNum);
-        for (int i = 0; i < social.Popu[personNum].Parent.Count; i++)
+		
+		//personInfo.text = GetTheName(personNum);
+		for (int i = 0; i < social.Popu[personNum].Grand.Count; i++)
+		{
+			if(social.Popu[personNum].Grand[i] != null)
+			{
+				GameObject Grand = Instantiate(personBtn);
+				Grand.transform.localScale = new Vector3(1,1,1);
+				Grand.transform.SetParent(GrandGrid.transform);
+			}
+
+		}
+		for (int i = 0; i < social.Popu[personNum].Parent.Count; i++)
         {
-            GameObject parent = Instantiate(personBtn);
-            parent.transform.localScale = new Vector3(1,1,1);
-           // parent.transform.SetParent();
-        }
+			if(social.Popu[personNum].Parent[i] != null)
+			{
+				GameObject parent = Instantiate(personBtn);
+				parent.transform.localScale = new Vector3(1,1,1);
+				parent.transform.SetParent(ParentGrid.transform);
+			}
+		}
+		for (int i = 0; i < social.Popu[personNum].BroSis.Count; i++)
+		{
+			if(social.Popu[personNum].BroSis[i] != null)
+			{
+				GameObject BroSis = Instantiate(personBtn);
+				BroSis.transform.localScale = new Vector3(1,1,1);
+				BroSis.transform.SetParent(BroSisGrid.transform);
+			}
+
+		}
+		for (int i = 0; i < social.Popu[personNum].Children.Count; i++)
+		{
+			if(social.Popu[personNum].Children[i] != null)
+			{
+				GameObject Children = Instantiate(personBtn);
+				Children.transform.localScale = new Vector3(1,1,1);
+				Children.transform.SetParent(ChildrenGrid.transform);
+			}
+
+		}
+
 	}
 
-    string GetTheName(int num)
-    {
-        string text = social.Popu[num].firstname + social.Popu[num].lastname;
-        return text;
-    }
+    
+
     
 }
