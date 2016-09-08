@@ -65,8 +65,9 @@ public class UImanage : MonoBehaviour {
 		{
 			if(social.Popu[personNum].BroSis[i] != null)
 			{
-				GameObject BroSis = Instantiate(personBtn);
+				Person BroSis = Instantiate(social.Popu[personNum].BroSis[i] );
 				BroSis.transform.localScale = new Vector3(1,1,1);
+                BroSis.transform.localPosition = new Vector3(0,0,0);
 				BroSis.transform.SetParent(BroSisGrid.transform);
 			}
 
