@@ -19,18 +19,9 @@ public class Person : MonoBehaviour {
     public int age = 0;
 	// Use this for initialization
 
-	void Awake()
-	{
-		person = this;
-	}
-	void Start () {
 	
-	}
-
-	public Person GetPerson()
-	{
-		return person;
-	}
+	
+    
 
 	void OnClick()
 	{
